@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="http://50df39cf1ff06ee2b590-6135bed6c599dc7ad437e065c1d165d2.r46.cf1.rackcdn.com/stylesheets/stylesheet.css">
+    
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    
+    <!-- Star Rating JS -->
+    <script src="http://50df39cf1ff06ee2b590-6135bed6c599dc7ad437e065c1d165d2.r46.cf1.rackcdn.com/javascripts/star-rating.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="http://50df39cf1ff06ee2b590-6135bed6c599dc7ad437e065c1d165d2.r46.cf1.rackcdn.com/stylesheets/star-rating.min.css">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://b51a8ff2cfb1f3fc06d7-6135bed6c599dc7ad437e065c1d165d2.ssl.cf1.rackcdn.com/stylesheets/custom_front.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" media="all" href="https://b51a8ff2cfb1f3fc06d7-6135bed6c599dc7ad437e065c1d165d2.ssl.cf1.rackcdn.com/stylesheets/automic.css">
+
+    <title>Trigger - Integration RSyslog </title>
+    
+  </head>
+
+
+<body id="ghpages">
+<div id="wrapper">
+<div id="header">
+<header>
+
+<div role="navigation" class="navbar navbar-default navbar-fixed-top" id="nav-strip">
+	<div class="bottom-nav ">
+	  <div class="row">
+	    <div class="container">
+              <dl class="dropdown nav navbar-nav navbar-right">
+                <div class="dp"></div>
+              </dl> 
+	      <div class="col-sm-3">
+		<a class="navbar-brand" href="http://www.automic.com/">
+		  
+		  <img class="image-logo" src="https://a5616ff0bb354f2460a0-9c1a2e36fc783cc4c58ab6184c27cf6b.ssl.cf1.rackcdn.com/white_logo.png" alt="">
+		  
+		</a>
+	      </div>
+	      <div class="col-sm-9">
+		<div class="navbar-header">
+		  <button data-target=".topheader" data-toggle="collapse" class="navbar-toggle" type="button">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		</div>
+		<div style=" position: relative; top: 20px;" class="navbar-collapse topheader collapse">
+                  <!--/ 	<span class="glyphicon glyphicon-user start"></span>-->
+                    <ul class="nav navbar-nav front">
+					  <li class="m-home"><a href="https://marketplace.automic.com" target="_blank">Marketplace</a></li>
+                      <li><a href="http://docs.automic.com" target="_blank">Documentation</a></li>
+                      <li><a href="https://community.automic.com" target="_blank">Community</a></li>
+                    </ul>
+		</div><!--/.nav-collapse -->
+              </div><!--/.span-12 -->
+	    </div><!--/.row -->
+	  </div>
+      </div>
+</div>
+   
+</header>
+</div>
+
+ <!-- MAIN CONTENT -->
+    <div id="content">
+      <div class="container">
+
+          
+	<div class="row">
+	  <div>
+	    <h1>Trigger - Integration RSyslog </h1>
+	  </div>
+	</div>
+	<div class="row">
+	  <div>
+	    <h2>Integrate with RSyslog</h2>
+	  </div>    
+	</div>
+      </div>
+    
+      <div class="container main_body">
+	<div class="row">
+	  
+	  <div class="col-md-8">
+	      <div class="row tabs">
+	      <ul class="nav nav-tabs">
+		<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+		<li><a href="#contents" data-toggle="tab">Contents</a></li>
+		<li><a href="#compatibility" data-toggle="tab">Compatibility</a></li>
+		<li><a href="#credits" data-toggle="tab">Credits</a></li>
+	      </ul>
+	      
+	    <!-- Tab contents -->  
+	    <div class="tab-content"> 
+	      <div id="overview" class="tab-pane active">
+		<div class="row">
+		  <div class="col-md-12 description">
+		    <h3>Description</h3>
+		    <p><div class="ipsType_textblock ipsPad_half description_content"><span><strong class="bbc">Prerequisites</strong></span>
+<ul class="bbc">
+<li>Unix with <strong class="bbc">Rsyslog</strong> server for system logging.</li>
+<li>cURL (cf. <a class="bbc_url" title="External link" href="http://curl.haxx.se/" rel="nofollow external">http://curl.haxx.se/</a>)</li>
+</ul>
+<span><strong class="bbc">Define the Syslog event to monitor</strong></span>
+<ul class="bbc">
+<li>Go to directory containing your "<em class="bbc">rsyslog.conf</em>" file (this should be /etc).</li>
+<li>Edit "<em class="bbc">rsyslog.conf</em>" file.</li>
+<li>Go at the end of the file.</li>
+<li>Add the following line, that defines a template output:</li>
+</ul>
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="pln">$template t_orsyp_trigger</span><span class="pun">,</span><span class="str">"%programname%|%hostname%|%syslogfacility%|%syslogseverity%|%timereported%|%msg%"</span></pre>
+<ul class="bbc">
+<li>Add the following line, that defines which kind of events you want to monitor:</li>
+</ul>
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="pun">{</span><span class="pln">FACILITY</span><span class="pun">}.{</span><span class="pln">SEVERITY</span><span class="pun">}</span><span class="pln"> </span><span class="pun">^{</span><span class="pln">PATH_TO_YOUR_SCRIPT</span><span class="pun">};</span><span class="pln">t_orsyp_trigger</span></pre>
+<br />Where {<strong class="bbc"><em class="bbc">FACILITY</em></strong>} and {<em class="bbc"><strong class="bbc">SEVERITY</strong></em>} give a first filter on the Syslog events you want to trigger.<br />{<strong class="bbc">PATH_TO_YOUR_SCRIPT</strong>} indicates the path to the given script that will launch the $U trigger.<br />If you want to trigger several Syslog events, you can add other lines of that kind. You could have for example, something like:<br /><br />
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="pln">kern</span><span class="pun">.*</span><span class="pln"> </span><span class="pun">^</span><span class="str">/var/</span><span class="pln">opt</span><span class="pun">/</span><span class="pln">ORSYP</span><span class="pun">/</span><span class="pln">DUAS</span><span class="pun">/</span><span class="pln">rsyslog_event_trigger</span><span class="pun">.</span><span class="pln">sh</span><span class="pun">;</span><span class="pln">t_orsyp_trigger</span></pre>
+<br />
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="pln">auth</span><span class="pun">.*</span><span class="pln"> </span><span class="pun">^</span><span class="str">/var/</span><span class="pln">opt</span><span class="pun">/</span><span class="pln">ORSYP</span><span class="pun">/</span><span class="pln">DUAS</span><span class="pun">/</span><span class="pln">rsyslog_event_trigger</span><span class="pun">.</span><span class="pln">sh</span><span class="pun">;</span><span class="pln">t_orsyp_trigger</span></pre>
+<br />
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="pun">*.</span><span class="pln">crit </span><span class="pun">^</span><span class="str">/var/</span><span class="pln">opt</span><span class="pun">/</span><span class="pln">ORSYP</span><span class="pun">/</span><span class="pln">DUAS</span><span class="pun">/</span><span class="pln">rsyslog_event_trigger</span><span class="pun">.</span><span class="pln">sh</span><span class="pun">;</span><span class="pln">t_orsyp_trigger</span></pre>
+<br /><strong class="bbc"><span class="bbc_underline">NB:</span></strong> You can only filter the Syslog events by their facility and their severity here. If you want more advanced filters, this should be done on $U side.<br /><strong class="bbc"><span class="bbc_underline">NB:</span></strong> For performance considerations, you should avoid having a line like that:<br /><br /><br />
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="pun">*.*</span><span class="pln"> </span><span class="pun">^{</span><span class="pln">PATH_TO_YOUR_SCRIPT</span><span class="pun">};</span><span class="pln">t_orsyp_trigger</span></pre>
+<br /><br /><span><strong class="bbc">Define which $U node to target </strong></span>
+<ul class="bbc">
+<li>Inform the attributes giving the definition of the target $U node:<br />
+<ul class="bbc">
+<li><em class="bbc"><strong class="bbc">host:</strong> </em>The hostname of the $U node.</li>
+<li><em class="bbc"><strong class="bbc">port</strong>: </em>The port number of the $U api.</li>
+<li><em class="bbc"><strong class="bbc">area</strong></em>: The target area.</li>
+</ul>
+</li>
+<li>Inform the attributes giving the way you are going to authenticate yourself to $U node:</li>
+</ul>
+<strong class="bbc"><span class="bbc_underline">NB:</span></strong> You must inform either the authentication key or your credentials.<br /><strong class="bbc"><span class="bbc_underline">NB:</span></strong> If you inform both the authentication key and your credentials, only the authentication will be taken into account.
+<ul class="bbc">
+<li><em class="bbc"><strong class="bbc">authentication_key</strong></em>: The authentication key you got via UVC. OR</li>
+<li><em class="bbc"><strong class="bbc">user</strong> </em>/ <em class="bbc"><strong class="bbc">password</strong></em>: Your credentials.</li>
+<li>[optional] You can modify the event type that will be raised on $U. By default this event type is: "<strong class="bbc">SYSLOG_EVENT</strong>".</li>
+<li>Save and close the script.</li>
+<li>Ensure that the script is executable by the <strong class="bbc">rsyslog</strong> server.</li>
+</ul>
+<span><strong class="bbc">Event properties</strong></span><br /><span><span><span>The given script transmit, by default, the following event properties:</span></span></span>
+<ul class="bbc">
+<li><span><span><span><em class="bbc"><strong class="bbc">PROGRAM</strong></em>: The name of the program that raised the Syslog event.</span></span></span></li>
+<li><span><span><span><em class="bbc"><strong class="bbc">HOST</strong></em>: The host of this program.</span></span></span></li>
+<li><span><span><span><em class="bbc"><strong class="bbc">FACILITY</strong></em>: The Syslog facility level numeric value (cf. <a class="bbc_url" title="External link" href="http://en.wikipedia.org/wiki/Syslog#Facility_levels" rel="nofollow external">http://en.wikipedia....Facility_levels</a>).</span></span></span></li>
+<li><span><span><span><em class="bbc"><strong class="bbc">SEVERITY</strong></em>: The Syslog severity level numeric value (cf. <a class="bbc_url" title="External link" href="http://en.wikipedia.org/wiki/Syslog#Severity_levels" rel="nofollow external">http://en.wikipedia....Severity_levels</a>).</span></span></span></li>
+<li><span><span><span><em class="bbc"><strong class="bbc">DATE</strong></em>: The date/time when the Syslog event has been raised.</span></span></span></li>
+<li><span><span><span><em class="bbc"><strong class="bbc">MESSAGE</strong></em>: The message of the Syslog event.</span></span></span></li>
+</ul>
+<span><span><span><strong class="bbc">Customize the transmitted event properties</strong></span></span></span><br /><span><span><span>If you want to add or remove some event properties, you should modify the </span></span></span><em class="bbc"><strong class="bbc">t_orsyp_trigger</strong></em><span><span><span> template or add a new one.</span></span></span><br /><span><span><span>The template have to be like this: "</span></span></span><em class="bbc">%property1%|%property2%|...|%propertyN%</em><span><span><span>"</span></span></span><br /><span><span><span>With '|' separating each considered property.</span></span></span><br /><span><span><span>Please refer to this page for the list of the available properties: </span></span></span><a class="bbc_url" title="External link" href="http://www.rsyslog.com/doc/property_replacer.html" rel="nofollow external">http://www.rsyslog.c...y_replacer.html</a><span><span><span>.</span></span></span><br /><span><span><span>Then, you also need modify the given script accordingly.</span></span></span><br /><span><span><span>Just search for the following comment to find the places where you have to modify the script:</span></span></span><br /><br />
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="com"># You should modify these lines if you modify the list of considered event properties</span></pre>
+<br /><br /><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><strong class="bbc">Output</strong></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><br /><span><span><span>Basically, the output of the script will be something like:</span></span></span><br />
+<pre class="prettyprint lang-auto linenums:0 prettyprinted"><span class="typ">Script</span><span class="pln"> launched at </span><span class="pun">{</span><span class="pln">DATE</span><span class="pun">}</span><span class="pln">
+</span><span class="typ">Login</span><span class="pln"> on </span><span class="pun">{</span><span class="pln">HOST</span><span class="pun">}:{</span><span class="pln">PORT</span><span class="pun">}</span><span class="pln"> </span><span class="pun">--&gt;</span><span class="pln"> </span><span class="typ">Success</span><span class="pln">
+</span><span class="typ">Send</span><span class="pln"> </span><span class="kwd">event</span><span class="pln"> TEST </span><span class="pun">--&gt;</span><span class="pln"> </span><span class="typ">Incomplete</span><span class="pln">
+</span><span class="pun">=&gt;</span><span class="pln"> </span><span class="typ">Trigger</span><span class="pun">:</span><span class="pln"> TEST1 </span><span class="pun">--&gt;</span><span class="pln"> </span><span class="typ">Launch</span><span class="pln"> number</span><span class="pun">:</span><span class="pln"> XXXXXXX
+</span><span class="pun">=&gt;</span><span class="pln"> </span><span class="typ">Trigger</span><span class="pun">:</span><span class="pln"> TEST2 </span><span class="pun">--&gt;</span><span class="pln"> </span><span class="typ">Error</span><span class="pln"> </span><span class="lit">1023</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Only</span><span class="pln"> provoked tasks can be triggered</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Logout</span><span class="pln"> </span><span class="pun">--&gt;</span><span class="pln"> </span><span class="typ">Success</span></pre>
+<br /><span><span><span>Then the output gives you basic trigger related operations:</span></span></span>
+<ul class="bbc">
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span>Login (if no authentication key given)</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span>Event type launch</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span>Logout (if no authentication key given)</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span><span>&amp;#8203;</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span><span><span>It will give you the launch number of the launched jobs, or the code and error message if a launch has failed.</span></span></span><br /><span><span><span><strong class="bbc"><span class="bbc_underline">NB:</span> </strong></span></span></span><span><span><span>By default this is logged into a .log file with the same name as your script. You can transform it to a console output by modifying the </span></span></span><em class="bbc"><strong class="bbc">log_to_file</strong></em><span><span><span> attribute value to "0".</span></span></span></div></p>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-md-12 media">
+		  <h3>Media</h3>
+		  <p>[MEDIA]</p>
+		  </div>
+		</div>
+	      </div>
+	      
+	      <div id="contents" class="tab-pane">
+		<div class="row">
+		  <h3>Contents of Package</h3>
+		  <ul>
+		    <li>Dollar_Universe-RSyslog_Event_Trigger.zip</li>
+		  </ul>
+		  <div class="downloads_buttons" style="margin-top:50px;font-size:1.2em;">
+		    <a class="download_zip dl" href="https://github.com/automic-community/Trigger---Integration-RSyslog-/zipball/master">Download .zip</a>
+			<br><br>
+		    <a class="download_tar dl" href="https://github.com/automic-community/Trigger---Integration-RSyslog-/tarball/master">Download .tar</a>  
+		  </div>
+		</div>
+	      </div>
+	      
+	      <div id="compatibility" class="tab-pane">
+		<div class="row">
+		<h3>Compatibility</h3>
+		  <div class="row">
+		    <div class="col-md-6">
+		      <h4 class="comp-product">Platform</h4>
+		      <div class="list">
+			<a href="http://marketplace.automic.com/marketplace/browse#category/Dollar Universe - UniJob">Dollar Universe - UniJob<span class="comma">,</span></a>
+		      </div>
+		    </div>
+		    <div class="col-md-6">
+		      <h4 class="comp-versions">Versions</h4>
+		      <div class="list">
+			 <a href="http://marketplace.automic.com/marketplace/browse#version/6.x">6.x<span class="comma">,</span></a>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <div class="col-md-6">
+		      <h4 class="comp-platforms">Operating Systems</h4>
+		      <div class="list">
+			 <a href="http://marketplace.automic.com/marketplace/browse#platform/Linux">Linux<span class="comma">,</span></a>
+		      </div>
+		    </div>
+		    <div class="col-md-6">
+		      <h4 class="comp-apps">Applications</h4>
+		      <div class="list">
+			
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	      </div>
+	      
+	      <div id="credits" class="tab-pane">
+		<div class="row">
+		<h3>Created by....</h3>
+		<div>
+		  Created By:  , 
+		</div>
+		</div>
+	      </div>
+	      
+	    </div>
+	    <!-- End of Tabbed Content -->
+	    </div>
+	      
+	    
+	<!-- Pulled out Comment code -->   
+	  
+	  </div>
+	  
+	  <div class="col-md-3 col-md-offset-1" style="top: -33px;">
+	    
+	      <div class="row d-links">
+		<div class="down-t">Downloads</div>
+		<a class="zip_download_link dl" href="https://github.com/Automic-Community/Trigger---Integration-RSyslog-/zipball/master">Download this project as a .zip file</a>
+		<a class="tar_download_link dl" href="https://github.com/Automic-Community/Trigger---Integration-RSyslog-/tarball/master">Download this project as a tar.gz file</a>
+	      </div>
+
+	      <div class="row rating">
+
+		<a class="forkme" href="https://github.com/Automic-Community/Trigger---Integration-RSyslog-">View on GitHub</a>
+		 
+	  	 
+		<div class="social-buttons">
+		  <a target="_blank" class="share-btn twitter" href="http://twitter.com/share?url=http://automic-community.github.io/Trigger---Integration-RSyslog-&text=Check%20out%20this%20awesome%20App%20on%20the%20%23AutomicCommunity%20eXchange&via=automic">
+		    <i class="fa fa-twitter"></i>
+		  </a>
+		  <a target="_blank" class="share-btn linkedin" href="http://www.linkedin.com/shareArticle?url=url=http://automic-community.github.io/Trigger---Integration-RSyslog-&title=Trigger - Integration RSyslog &summary=Integrate with RSyslog&source=url=http://github.com/automic-community/Trigger---Integration-RSyslog-">
+		    <i class="fa fa-linkedin"></i>
+		  </a>
+		  <a target="_blank" class="share-btn facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://automic-community.github.io/Trigger---Integration-RSyslog-">
+		    <i class="fa fa-facebook-square"></i>
+		  </a>
+		  <a target="_blank" class="share-btn google-plus" href="https://plus.google.com/share?url=http://automic-community.github.io/Trigger---Integration-RSyslog-">
+		    <i class="fa fa-google-plus-square"></i>
+		  </a>
+		  <a target="_blank" class="share-btn email" href="mailto:?subject=Check%20out%20this%20awesome%20App%20on%20the%20%23AutomicCommunity%20eXchange&body=Integrate with RSyslog" >
+		    <i class="fa fa-envelope"></i>
+		  </a>
+		</div>
+
+	      </div>
+	   
+	    
+	    <div class="row tags">
+	      <div class="comp-type">
+		App
+	      </div>
+	      <div class="comp-product">
+		<a href="http://marketplace.automic.com/marketplace/browse#category/Dollar Universe - UniJob">Dollar Universe - UniJob<span class="comma">,</span></a>
+	      </div>
+	      <div class="comp-versions">
+	       <a href="http://marketplace.automic.com/marketplace/browse#version/6.x">6.x<span class="comma">,</span></a>
+	      </div>
+	      <div class="comp-platforms">
+		 <a href="http://marketplace.automic.com/marketplace/browse#platform/Linux">Linux<span class="comma">,</span></a>
+	      </div>
+	      <div class="comp-apps">
+		
+	      </div>
+	    </div>
+	      
+	    <div class="row help">
+		<a class="supported" href="#">Community Supported</a>
+		<div class="ask">
+		  <a href="https://community.automic.com" target="_blank" class="btn">Ask the Community</a>
+		</div>
+		<p>
+		  Converse with your fellow Users in the <a href="http://community.automic.com">Community</a>.
+		</p>
+	    </div>
+	    
+	  </div>
+	
+	</div>
+	
+	<div class="row">
+	  <div class="col-md-3 col-md-offset-9">
+	    <div class="copyright">
+	      <h4>Copyright and License</h4>
+	      <p>
+		Solutions, Templates and other content created by the Automic Community and available on the Automic Marketplace is subject to the standard Community <a href="http://automic.com/community-terms-of-service">Terms of Service</a>. 
+		Automic does not support, maintain or warrant any Solution, Templates and/or other content created by the Automic Community on the Automic Marketplace.
+	      </p>
+	    </div>
+	  </div>
+	</div>
+	
+      </div>
+    </div>
+  
+  <div id="footer">
+  <footer>
+    <div class="container">
+      <!-- FOOTER  -->
+      <div class="row"> 
+	  <div class="copyright">
+	    Package maintained by the <a href="https://github.com/Automic-Community">Automic-Community</a> GitHub Org
+	  </div>
+	  <div>
+	    Published by the <a href="https://community.automic.com">Automic Think Tank</a>
+	  </div>
+      </div>
+    </div>
+  </footer>
+</div>
+  
+    </div>
+  </body>
+</html>
